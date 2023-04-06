@@ -29,12 +29,12 @@ while(i < QtdCartas/2){
     listCard = document.querySelector(".baralho")
     let indice = randomizar(0,versos.length-1);
     carta = 
-    `<li onclick="virarCarta(this)" class="carta">
+    `<li  data-test="card" onclick="virarCarta(this)" class="carta ${versos[indice]}">
         <div class="frente lado ver">
-            <img src="imagens/back.png">
+            <img data-test="face-down-image" src="imagens/back.png">
         </div>
         <div class="verso lado Nver">
-            <img src="imagens/${versos[indice]}"> 
+            <img data-test="face-up-image" src="imagens/${versos[indice]}"> 
         </div>    
     </li>`
     
@@ -57,14 +57,13 @@ while(c<QtdCartas){
 
 //! quando clicado troca a face da carta
 function virarCarta(x){
-    const carta1 = x.querySelector(".verso");
+    let carta1 = x.querySelector(".verso");
     carta1.classList.toggle("Nver");
     carta1.classList.toggle("ver");
 
-    const carta2 = x.querySelector(".frente");
+    let carta2 = x.querySelector(".frente");
     carta2.classList.toggle("ver");
     carta2.classList.toggle("Nver");
-
 }
 
 //!se os 2 forem iguais par caso nao desvira
