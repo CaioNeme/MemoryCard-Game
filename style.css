@@ -46,21 +46,19 @@ body{
     transition: all 1s;
     transform-style: preserve-3d;
 }
+
 .frente img{
     width: 100px;
     height: 100px;
 }
-.verso {
-    transform: rotateY(180deg);
-}
+
 .verso img{
     width: 100px;
     height: 100px;
 }
-.carta:hover .verso {
-    transform: rotateY(0deg);
+.ver{
+    display: flex;
 }
-
-.carta:hover .frente {
-    transform: rotateY(-180deg);
+.Nver{
+    display: none;
 }
