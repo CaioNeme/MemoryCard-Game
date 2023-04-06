@@ -53,7 +53,10 @@ body{
 .verso {
     transform: rotateY(180deg);
 }
-
+.verso img{
+    width: 100px;
+    height: 100px;
+}
 .carta:hover .verso {
     transform: rotateY(0deg);
 }
