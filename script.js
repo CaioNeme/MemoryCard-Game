@@ -1,11 +1,17 @@
 let QtdCartas = Number(prompt('Digite a quantidade de cartas: (4-14)'));
 let par = QtdCartas % 2;
 let i = 0;
-let listCard;
+let listCard = document.querySelector(".baralho");
 let versos = ['bobrossparrot.gif' ,'explodyparrot.gif' ,'fiestaparrot.gif' ,'metalparrot.gif' ,'revertitparrot.gif' ,'tripletsparrot.gif' ,'unicornparrot.gif'];
 let carta;
 let baralho = [];
 let c = 0;
+let verso = document.querySelector(".verso");
+let frente = document.querySelector(".frente");
+let jogadas = 0;
+let contador = 0;
+
+
 
 //! ver se a QtdCartas é maior que 14 se for reseta o codigo
 //! ver se a QtdCartas é par se nao for reseta o codigo
@@ -26,11 +32,10 @@ function randomizar(min, max) {
 //! fazer as cartas terem verso aleatorios mas tem que ter 2 iguais
 while(i < QtdCartas/2){
     //?add cartas + 1
-    listCard = document.querySelector(".baralho")
     let indice = randomizar(0,versos.length-1);
     carta = 
-    `<li  data-test="card" onclick="virarCarta(this)" class="carta ${versos[indice]}">
-        <div class="frente lado ver">
+    `<li  data-test="card" onclick="ehPar(this)" class="carta">
+        <div class="frente lado">
             <img data-test="face-down-image" src="imagens/back.png">
         </div>
         <div class="verso lado Nver">
@@ -55,15 +60,49 @@ while(c<QtdCartas){
     c++
 }
 
-//! quando clicado troca a face da carta
-function virarCarta(x){
-    let carta1 = x.querySelector(".verso");
-    carta1.classList.toggle("Nver");
-    carta1.classList.toggle("ver");
+function desvirar(a,b,c,d){
+    a.classList.remove('ver');
+    a.classList.add('Nver');
+    b.classList.remove('ver');
+    b.classList.add('Nver');
+    c.classList.remove('Nver');
+    //c.classList.add('ver');
+    d.classList.remove('Nver');
+    //d.classList.add('ver');
 
-    let carta2 = x.querySelector(".frente");
-    carta2.classList.toggle("ver");
-    carta2.classList.toggle("Nver");
 }
 
-//!se os 2 forem iguais par caso nao desvira
+function ehPar(clicado){
+    jogadas++
+    let verso = document.querySelector(".verso");
+    let frente = document.querySelector(".frente");
+
+    verso = clicado.querySelector(".verso");
+    verso.classList.remove("Nver");
+    verso.classList.add("ver");
+    
+    frente = clicado.querySelector(".frente");
+    //frente.classList.toggle("Nver");
+
+    let cartasViradas = document.querySelectorAll('.ver');
+    let cartasDesviradas = document.querySelectorAll('.frente')
+    let carta1 = cartasViradas[0].querySelector('img')
+    let carta2 = cartasViradas[1].querySelector('img')
+
+    if(carta1.src === carta2.src){
+        console.log('é igual');
+        cartasViradas[0].classList.add('sempreVer');
+        cartasViradas[1].classList.add('sempreVer');
+        cartasViradas[1].classList.remove('ver');
+        cartasViradas[0].classList.remove('ver');
+        cartasViradas = document.querySelectorAll('.ver');
+        contador = contador + 1;
+    }
+    else if(carta1.src !== carta2.src){
+        console.log('é diferente');
+        setInterval(desvirar(cartasViradas[1], cartasViradas[0], cartasDesviradas[1], cartasDesviradas[0]), 1000);
+    }
+    if(QtdCartas/2 == contador){
+        alert(`Você ganhou em ${jogadas}!`);
+    }
+}

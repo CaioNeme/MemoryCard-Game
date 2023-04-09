@@ -62,3 +62,8 @@ body{
 .Nver{
     display: none;
 }
+
+.sempreVer{
+    display: none;
+    display: flex;
+}
