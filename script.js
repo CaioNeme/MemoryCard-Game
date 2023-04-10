@@ -61,15 +61,15 @@ while (c < QtdCartas) {
     c++
 }
 
-function desvirar(a, b, c, d) {
+function desvirar(a, b, c, d, e) {
     a.classList.remove('ver');
     a.classList.add('Nver');
     b.classList.remove('ver');
     b.classList.add('Nver');
     c.classList.remove('Nver');
-    c.classList.add('ver');
+    //c.classList.add('ver');
     d.classList.remove('Nver');
-    d.classList.add('ver');
+    //d.classList.add('ver');
     e = [];
 
 }
@@ -98,7 +98,7 @@ function ehPar(clicado) {
     console.log(cartasViradas[0]);
     console.log(cartasViradas[1]);
 
-    if (carta1.src === carta2.src && cartasViradas[0] !== cartasViradas[1] && carta1.src !== null) {
+    if (carta1.src === carta2.src) {
         console.log('é igual');
         cartasViradas[0].classList.add('sempreVer');
         cartasViradas[1].classList.add('sempreVer');
@@ -110,6 +110,8 @@ function ehPar(clicado) {
     else if (carta1.src !== carta2.src) {
         console.log('é diferente');
         setTimeout(desvirar, 1000, cartasViradas[1], cartasViradas[0], cartasDesviradas[1], cartasDesviradas[0], cartasViradas);
+        cartasViradas = [];
+        console.log(cartasViradas);
     }
 
     if (QtdCartas / 2 == contador) {
